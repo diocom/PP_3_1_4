@@ -18,12 +18,13 @@ import java.util.Set;
 public class SuccessUserHandler extends SavedRequestAwareAuthenticationSuccessHandler {
     // Spring Security использует объект Authentication, пользователя авторизованной сессии.
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException {
         Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
         if (roles.contains("ADMIN")) {
             httpServletResponse.sendRedirect("/admin/users");
-        } else {
+        } else if (roles.contains("USER")) {
             UserDetails user = (UserDetails) authentication.getPrincipal();
             httpServletResponse.sendRedirect("/user");
         }

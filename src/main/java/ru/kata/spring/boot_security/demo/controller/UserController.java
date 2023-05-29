@@ -7,7 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
+import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
+import ru.kata.spring.boot_security.demo.service.UserServiceImpl;
 
 import java.security.Principal;
 import java.util.List;
@@ -26,21 +28,17 @@ import java.util.List;
 @Controller
 public class UserController {
     private final UserService userService;
-
+    private final RoleService roleService;
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, RoleService roleService) {
         this.userService = userService;
+        this.roleService = roleService;
     }
-
-    //@GetMapping("")
-    //public String viewHomePage() {
-    //    return "index";
-    //}
 
     @GetMapping("/user")
     public String showUser(Principal principal, Model model) {
         User user = userService.findUser(principal.getName());
-        List<Role> listRoles = userService.listRoles();
+        List<Role> listRoles = roleService.listRoles();
         model.addAttribute("user", user);
         model.addAttribute("listRoles", listRoles);
 
