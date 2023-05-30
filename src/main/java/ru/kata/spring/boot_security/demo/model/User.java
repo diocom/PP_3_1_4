@@ -20,7 +20,7 @@ public class User {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "password", nullable = false, length = 100)
+    @Column(name = "password", nullable = true, length = 100)
     private String password;
 
     @Column(name = "enabled")
@@ -127,26 +127,11 @@ public class User {
 
         User user = (User) o;
 
-        if (enabled != user.enabled) return false;
-        if (age != user.age) return false;
-        if (!id.equals(user.id)) return false;
-        if (!userName.equals(user.userName)) return false;
-        if (!name.equals(user.name)) return false;
-        if (!lastName.equals(user.lastName)) return false;
-        if (!password.equals(user.password)) return false;
-        return roles.equals(user.roles);
+        return id.equals(user.id);
     }
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + userName.hashCode();
-        result = 31 * result + name.hashCode();
-        result = 31 * result + lastName.hashCode();
-        result = 31 * result + password.hashCode();
-        result = 31 * result + (enabled ? 1 : 0);
-        result = 31 * result + age;
-        result = 31 * result + roles.hashCode();
-        return result;
+        return id.hashCode();
     }
 }

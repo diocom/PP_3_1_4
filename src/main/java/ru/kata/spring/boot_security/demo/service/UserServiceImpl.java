@@ -30,6 +30,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Transactional
+    @Override
     public void registerDefaultUser(User user) {
         Role roleUser = roleRepository.findByName("User");
         user.addRole(roleUser);
@@ -37,32 +38,39 @@ public class UserServiceImpl implements UserService{
         userRepository.save(user);
     }
 
+    @Override
     public List<User> findAll() {
         return userRepository.findAll();
     }
 
+    @Override
     public User findOne(Long id) {
         Optional<User> foundUser = userRepository.findById(id);
         return foundUser.orElse(null);
     }
 
+    @Override
     public User findUser(String userName) {
         return userRepository.getUserByUsername(userName);
     }
 
     @Transactional
+    @Override
     public void save(User user) {
         encodePassword(user);
         userRepository.save(user);
     }
 
     @Transactional
+    @Override
     public void update(Long id, User updatedUser) {
         updatedUser.setId(id);
+        encodePassword(updatedUser);
         userRepository.save(updatedUser);
     }
 
     @Transactional
+    @Override
     public void delete(Long id) {
         userRepository.deleteById(id);
     }

@@ -25,7 +25,6 @@ public class SuccessUserHandler extends SavedRequestAwareAuthenticationSuccessHa
         if (roles.contains("ADMIN")) {
             httpServletResponse.sendRedirect("/admin/users");
         } else if (roles.contains("USER")) {
-            UserDetails user = (UserDetails) authentication.getPrincipal();
             httpServletResponse.sendRedirect("/user");
         }
     }

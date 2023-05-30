@@ -8,12 +8,11 @@ create table roles
 
 create table users
 (
-    id        int auto_increment
-        primary key,
+    id        int auto_increment        primary key,
     age       tinyint unsigned zerofill not null,
     name      varchar(20)               null,
     last_name varchar(255)              null,
-    user_name varchar(100)              not null,
+    user_name varchar(100)              not null unique,
     password  varchar(100)              null,
     enabled   tinyint                   null,
     constraint users_username_uindex

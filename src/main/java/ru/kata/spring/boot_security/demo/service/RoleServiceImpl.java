@@ -13,10 +13,11 @@ public class RoleServiceImpl implements RoleService {
     public RoleServiceImpl(RoleRepository roleRepository) {
         this.roleRepository = roleRepository;
     }
-
+    @Override
     public Role getRoleName(String userRoleName) {
         return roleRepository.findByName(userRoleName);
     }
+    @Override
     public List<Role> listRoles() {
         return roleRepository.findAll();
     }
