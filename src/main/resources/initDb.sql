@@ -1,4 +1,8 @@
 USE test
+drop table roles
+drop table users
+drop table users_roles
+
 create table roles
 (
     id   int auto_increment
