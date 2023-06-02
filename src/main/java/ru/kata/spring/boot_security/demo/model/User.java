@@ -11,10 +11,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "user_name")
+    @Column(name = "user_name", unique = true, nullable = false, length=45)
     private String userName;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, length=45)
     private String name;
 
     @Column(name = "last_name", nullable = false)
@@ -36,6 +36,16 @@ public class User {
     private Set<Role> roles = new HashSet<>();
 
     public User() {
+    }
+
+    public User(String userName, String name, String lastName, String password, boolean enabled, int age, Set<Role> roles) {
+        this.userName = userName;
+        this.name = name;
+        this.lastName = lastName;
+        this.password = password;
+        this.enabled = enabled;
+        this.age = age;
+        this.roles = roles;
     }
 
     public String getUserName() {

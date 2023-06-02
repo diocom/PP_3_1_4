@@ -23,17 +23,9 @@ public class AdminController {
         this.roleService = roleService;
     }
 
-    @GetMapping("/registration")
-    public String showRegistrationForm(Model model) {
-        List<Role> listRoles = roleService.listRoles();
-        model.addAttribute("user", new User());
-        model.addAttribute("listRoles", listRoles);
-        return "/admin/registration";
-    }
-
     @PostMapping("/process_register")
     public String processRegister(@ModelAttribute("user") User user, Model model) {
-        userService.registerDefaultUser(user);
+        userService.save(user);
         return "redirect:/admin/users";
     }
 

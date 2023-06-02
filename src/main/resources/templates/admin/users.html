@@ -236,7 +236,7 @@
 										<form align="center" class="offset-md-4 col-md-3 mt-4 mb-4"
 											  th:align="center"
 											  th:action="@{process_register}"
-											  th:object="${userNew}"
+											  th:object="${userN}"
 											  method="post">
 											<fieldset>
 												<p>
@@ -269,10 +269,11 @@
 													</label>
 													<br/>
 													<b><label for="role">Role</label></b>
-													<select multiple class="form-control" id="role" name="role">
-														<option th:each="role : ${listRoles}"
-																sec:selected="*{hasAuthority('__${role.id}__')}" th:text="${role.name}"
-																th:value="${role.id}">
+													<select multiple class="form-control form-control-sm" id="role" name="roles" size="2">
+														<option th:each="role: ${listRoles}" th:name="roles" th:value="${role.id}">
+															<th:block th:text="${role.name}">
+															</th:block>
+														</option>
 													</select>
 												</p>
 											</fieldset>
